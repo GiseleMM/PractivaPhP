@@ -97,10 +97,36 @@ $referencia=&$vect6;
 $referencia[]="Python";
 var_dump($vect6);// no modifique este vector pero como el otro tiene la misma ref se modifica igual
 
+#is array()
+echo "<br/>";
+echo is_array($referencia);//1 q es true
+echo is_array($referencia)?"array":"no es array";
+echo "<br/>";
+echo is_array("a")?"array":"no es array";
 
+#obtener todas las claves con array_keys()
+var_dump(array_keys($vect4));
 
+#crea un nuevo  array  con el orden inverso del array pasado por parametro a la funcion array_reverse()
+echo "<br/>";
+var_dump($referencia);
+echo "<br/>";
+var_dump(array_reverse($referencia));
 
+#devuelve todos los valores del array
+echo "<br/>";
+var_dump(array_values($referencia));
 
+#verifica si un valor existe
+echo in_array("C#",$referencia)?" existe":"no existe ese valor";
+echo "<br/>";
+echo in_array("xxxx",$referencia)?" existe":"no existe ese valor";
+
+#verifica si exise una clave 
+echo "<br/>";
+echo array_key_exists("Rojo",$vect4)?"existe clave":"No existe clave";
+echo "<br/>";
+echo array_key_exists("XXXX",$vect4)?"existe clave":"No existe clave";
 
 
 ?>
