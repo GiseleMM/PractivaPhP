@@ -1,0 +1,3 @@
+Tortuga,macho,5
+gato,macho,1
+perra,hembra,15

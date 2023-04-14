@@ -1,18 +1,19 @@
-<?php 
+<?php
 //ASIGNACION
-class A{
-    public $valor=100;
+class A
+{
+    public $valor = 100;
 }
 
-$instancia=new A();
-$asig=$instancia;
-$ref=&$instancia;
+$instancia = new A();
+$asig = $instancia;
+$ref = &$instancia;
 
 echo $instancia::class;
 
 //$instancia->valor=20;
 //$asig->valor=30;
-$ref->valor=5;
+$ref->valor = 5;
 var_dump($instancia);
 echo "<br/>";
 var_dump($asig);
@@ -20,75 +21,90 @@ echo "<br/>";
 var_dump($ref);
 echo "<br/>";
 //si  asigno o paso la referencia es como si pasara la direccion de memoria si modifico una modifico todas
-class B{
-    public $mismoNombre="propieadad";
-    public function mismoNombre(){
+class B
+{
+    public $mismoNombre = "propieadad";
+    public function mismoNombre()
+    {
         return "metodo";
     }
 }
-echo((new B())->mismoNombre);
+echo ((new B())->mismoNombre);
 PHP_EOL;
-echo((new B())->mismoNombre());
+echo ((new B())->mismoNombre());
 
 //EXTENDS
 
-class Base{
-    public function F1(){
-        echo "f1 base".PHP_EOL;
+class Base
+{
+    public function F1()
+    {
+        echo "f1 base" . PHP_EOL;
     }
 }
-class Derivada extends Base{
-    public function F1(){
-        echo parent::F1()."agrego con derivada";
+class Derivada extends Base
+{
+    public function F1()
+    {
+        echo parent::F1() . "agrego con derivada";
     }
 }
 (new Derivada())->F1();
 echo (new Derivada())::class;
 
 //::class
-class KSHSKH{}    
-$obj =new KSHSKH();
-echo $obj::class;// optengo string con nombre
+class KSHSKH
+{
+}
+$obj = new KSHSKH();
+echo $obj::class; // optengo string con nombre
 
 //::  acceder a static y contantes desde el exterior
-class D{
-    const MAX="CONSTANTE";
-} 
+class D
+{
+    const MAX = "CONSTANTE";
+}
 echo D::MAX;
 
 
 //:: acceder desde el  interior de la clase  a  constantes y estaticos 
-class C extends D{
-    private static $miStatica="variable estatica";
-    public static function Metodo(){
+class C extends D
+{
+    private static $miStatica = "variable estatica";
+    public static function Metodo()
+    {
         //si no los pongo dentro de  metodo es error 
-    echo self::$miStatica;// accedo dentro de la misma clase
-    
-    echo parent::MAX;
-    }
+        echo self::$miStatica; // accedo dentro de la misma clase
 
+        echo parent::MAX;
+    }
 }
 C::Metodo();
 
 //VISIBILIDAD
 
-class Madre{
-    public $a="propiedad  public";
-    protected $b="propiedad  protected";
-    private $c="propiedad  private";
+class Madre
+{
+    public $a = "propiedad  public";
+    protected $b = "propiedad  protected";
+    private $c = "propiedad  private";
 
-    public function M1(){
+    public function M1()
+    {
         echo "metodo publico <br/>";
     }
-    
-    protected function M2(){
+
+    protected function M2()
+    {
         echo "metodo protected <br/>";
     }
-    private function M3(){
+    private function M3()
+    {
         echo "metodo private<br/>";
     }
 
-    public function Show(){
+    public function Show()
+    {
         //propedades uso desde adentro de la clase
         echo $this->a;
         echo $this->b;
@@ -97,29 +113,28 @@ class Madre{
         $this->M1();
         $this->M2();
         $this->M3();
-        
     }
-
-
 }
-class Hija extends Madre{
-   public function Show2(){
-    parent::M1();// tengo todo lo publico  y  protected
-    parent::M2();
-    echo $this->a;
-    echo $this->b;
-    //echo $this->c; no lo tengo
+class Hija extends Madre
+{
+    public function Show2()
+    {
+        parent::M1(); // tengo todo lo publico  y  protected
+        parent::M2();
+        echo $this->a;
+        echo $this->b;
+        //echo $this->c; no lo tengo
 
-   }
+    }
 }
-$ma=new Madre();
+$ma = new Madre();
 echo $ma->a;
 //echo $ma->b; no  las reconoce por q la estoy usando afuera de clase y derivada
 //echo $ma->c;
 $ma->M1();
 //$ma->M2(); // no puedo usar los metodos protected y private fuera de la clase
 //$ma->M3();
-$hija=new Hija();
+$hija = new Hija();
 echo $hija->a;
 //echo $hija->b;
 //echo $hija->c;
@@ -129,31 +144,34 @@ var_dump($hija);
 
 
 //STATIC
-class ClaseConStatic{
+class ClaseConStatic
+{
     //propiedad
-    public static $propiedad="propiedad estatica";
+    public static $propiedad = "propiedad estatica";
     //uso interno 
-    public function ShowPropiedad(){
+    public function ShowPropiedad()
+    {
         echo self::$propiedad; // uso self para referirnos a un elemento estatico de la clase dentro de la misma , en este caso una propiedad.
         //self::Metodo(); puedo llamar al metodo tambien con self dentro de la misma clase
     }
 
-    public static function Metodo(){
+    public static function Metodo()
+    {
         echo "metodo estaico";
     }
-
-
 }
-$est=new ClaseConStatic();
-$est::Metodo();// uso el objeto para llamar a metodo estatico
+$est = new ClaseConStatic();
+$est::Metodo(); // uso el objeto para llamar a metodo estatico
 ClaseConStatic::Metodo();
- $est->ShowPropiedad(); //dentro uso la propiedad estatica
+$est->ShowPropiedad(); //dentro uso la propiedad estatica
 //
 
- function NL(){
+function NL()
+{
     echo "<br/>";
 }
-function Titulo($titulo){
+function Titulo($titulo)
+{
     NL();
     echo $titulo;
     NL();
@@ -161,62 +179,156 @@ function Titulo($titulo){
 //ABTRACCION EN CLASES
 Titulo("abstracta");
 
-abstract class ClaseABSTARCTA{
+abstract class ClaseABSTARCTA
+{
     abstract protected function MetodoAbstracto($param);
 }
-class ClaseConcreta extends ClaseABSTARCTA{
-    public  function MetodoAbstracto($param, $paramConValor=100){// puedo relajar la visibilidad y ademas agregar  argumento con valores por default
+class ClaseConcreta extends ClaseABSTARCTA
+{
+    public  function MetodoAbstracto($param, $paramConValor = 100)
+    { // puedo relajar la visibilidad y ademas agregar  argumento con valores por default
         echo $param;
         echo $paramConValor;
     }
-
 }
 (new ClaseConcreta())->MetodoAbstracto("uso metodo abstracto");
-(new ClaseConcreta())->MetodoAbstracto("uso metodo abstracto","uso argumento con valor por defecto");
+(new ClaseConcreta())->MetodoAbstracto("uso metodo abstracto", "uso argumento con valor por defecto");
 
 
 //INTERFACE 
 Titulo("INTERFACE");
-interface IEjemplo{
+interface IEjemplo
+{
     public function MetodoDeInterfaz($valor);
-
 }
-class ClaseConInterfaz implements IEjemplo{
- public function MetodoDeInterfaz($valor)
- {
-    echo $valor;
- }
+class ClaseConInterfaz implements IEjemplo
+{
+    public function MetodoDeInterfaz($valor)
+    {
+        echo $valor;
+    }
 }
-$objeto= new ClaseConInterfaz();
+$objeto = new ClaseConInterfaz();
 $objeto->MetodoDeInterfaz("uso metdoo de interfaz");
 
 //ITERAR
 Titulo("ITERAR OBJETO");
-class MiClase{
-    public $atributo1="uno";
-    public $atributo2="dos";
-    public $atributo3="tres";
+class MiClase
+{
+    public $atributo1 = "uno";
+    public $atributo2 = "dos";
+    public $atributo3 = "tres";
 
-protected $atributo4="cuatro";
-private $atributo5="cinco";
-    public function MiIterador(){
+    protected $atributo4 = "cuatro";
+    private $atributo5 = "cinco";
+    public function MiIterador()
+    {
 
         foreach ($this as $key => $value) {
             print "$key=> $value";
             print "/n";
         }
     }
-
 }
-$miClase= new MiClase();
+$miClase = new MiClase();
 foreach ($miClase as $key => $value) {
-        print "$key=>$value";
-        print "/n";
+    print "$key=>$value";
+    print "/n";
 }
 //esto solo muestra los atributos publicos por q estoy fuera de la clase
 $miClase->MiIterador();
 //esto muestra todo por que lo hice dentro de la clase
 
+Titulo("patron Singlenton");
+class Singlenton
+{
+    private static $_instancia;
+    private function __construct()
+    {
+    }
+    public static function getSingleton()
+    {
+        if (self::$_instancia == null) {
+            self::$_instancia = new Singlenton();
+        }
+        return self::$_instancia;
+    }
+}
+$s1 = Singlenton::getSingleton();
+
+$s2 = Singlenton::getSingleton();
+echo ($s1 === $s2) ? "son la misma instancia" : "no son la misma instancia";
+
+//validacion de paramentros
+
+class Larga
+{
+    private $edad;
+    private $nombre;
+    private $color;
+    private $id;
+    private $precio;
+    private $nac;
 
 
+    private function ValidarPropiedades($array)
+    {
+
+        $valido = true;
+        foreach ($array as $clave => $valor) {
+            switch ($clave) {
+                case 'edad':
+                case 'id':
+                case 'precio':
+                    # code...
+                    if (!is_numeric($valor)) {
+                        $valido = false;
+                        echo "no valida numero";
+                    }
+                    break;
+
+                case 'nombre':
+                case 'color':
+                    if (empty($valor)) {
+                        $valido = false;
+                        echo "no valida string vacio";
+                    }
+
+                    break;
+
+          
+                case 'nac':
+                    $fecha=explode("/",$valor);
+                   if(! checkdate($fecha[1],$fecha[2],$fecha[0])){
+                    $valido= false;
+                    echo "no valida fecha";
+                   }
+                    # code...
+                    break;
+
+
+            }
+            if ($valido === false) {
+                return $valido;
+                break;
+            }
+        }
+        return $valido;
+    }
+
+    public function __construct($edad,$color,$nombre,$id,$precio,$fecha)
+    {
+        if(isset($edad,$color,$nombre,$id,$precio,$fecha)){
+            $vec=Array('edad'=>$edad,"nombre"=>$nombre,"color"=>$color,"id"=>$id,"precio"=>$precio,"nac"=>$fecha);
+            if($this->ValidarPropiedades($vec)){
+                 echo "datos validos";
+            }else{
+                echo "lanzar excepcion";
+            }
+        }
+        
+    }
+}
+$larga=new Larga(33,"rojo","Lali",7,1000,"2000/12/12");
 ?>
+
